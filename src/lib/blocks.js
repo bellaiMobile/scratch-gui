@@ -1,4 +1,5 @@
 import ScratchBlocks from 'scratch-blocks';
+import customizing from '../bellai/scratch-blocks/index';
 
 /**
  * Connect scratch blocks with the vm
@@ -331,5 +332,6 @@ export default function (vm) {
         return collator.compare(str1, str2);
     };
 
+    customizing(ScratchBlocks);
     return ScratchBlocks;
 }

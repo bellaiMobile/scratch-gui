@@ -1,8 +1,9 @@
-import VM from 'scratch-vm';
+// import VM from 'scratch-vm';
+import defaultVM from '../bellai/scratch-vm/index';
 import storage from '../lib/storage';
 
 const SET_VM = 'scratch-gui/vm/SET_VM';
-const defaultVM = new VM();
+// const defaultVM = new VM();
 defaultVM.attachStorage(storage);
 const initialState = defaultVM;
 
