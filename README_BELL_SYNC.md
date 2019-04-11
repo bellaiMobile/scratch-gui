@@ -19,9 +19,10 @@ git remote add scratch-gui https://github.com/llk/scratch-gui.git
 git remote -v
 ```
 
-4. 此时可以查看所有源所有分支：
+4. 拉取llk/scratch-gui下代码更新，此时可以查看所有源所有分支：
 
 ```shell
+git fetch scratch-gui
 git branch -av
 ```
 
@@ -34,3 +35,11 @@ git push -u origin develop
 ```
 
 6. 此时合并已经成功了，远程develop分支保持了和llk/scratch-gui下develop分支同步
+
+### 第一次之后的更新直接从4从后执行即可
+
+```shell
+git fetch scratch-gui
+git merge scratch-gui/develop
+git push -u origin develop
+```
