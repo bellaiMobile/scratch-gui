@@ -1,3 +1,4 @@
+import inherits from './inherits';
 export default function (Blockly) {
     Blockly.FieldColurDialog = function (colour) {
         Blockly.FieldColurDialog.superClass_.constructor.call(this, colour);
@@ -5,17 +6,17 @@ export default function (Blockly) {
         // 配置颜色
         // this.columns_ = ['#000000', '#0050dc', '#78fa00', '#ffff00', '#ff1428', '#ffffff', '#c81eff', '#ff9800'];
     };
-    goog.inherits(Blockly.FieldColurDialog, Blockly.Field);
+    inherits(Blockly.FieldColurDialog, Blockly.Field);
 
     Blockly.FieldColurDialog.fromJson = function (element) {
         return new Blockly.FieldColurDialog(element.colour);
     };
 
     Blockly.FieldColurDialog.prototype.showEditor_ = function () {
-        var div = goog.dom.createDom('div', {});
-        var row = goog.dom.createDom('div', {
-            'class': 'bell-colour-dialog'
-        });
+        var div = document.createElement('div');
+        var row = document.createElement(div);
+        row.className = 'bell-colour-dialog';
+
         for (var i = 0; i < this.columns_.length; i++) {
             var colour = this.columns_[i];
             var item = document.createElement('div');
@@ -31,7 +32,7 @@ export default function (Blockly) {
                 Blockly.DialogDiv.hide(); // hide
             });
         }
-        goog.dom.appendChild(div, row);
+        div.appendChild(row);
 
         Blockly.DialogDiv.show(div, function () {
             Blockly.unbindEvent_(item);

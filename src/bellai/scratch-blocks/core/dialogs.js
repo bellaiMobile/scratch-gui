@@ -418,18 +418,20 @@ export default function (Blockly) {
         var topPane = document.createElement('div');
         topPane.className = 'bell-ballList-indicateBallContainer';
 
-        var wall = goog.dom.createDom('img', { 
-            style: 'width: 400px;margin-left: 80px;margin-top: 40px;', 
-            src: Blockly.utils.getRuntimeImagePath('dialogs/sensor/wall_near.png') 
-        });
-        var ball = goog.dom.createDom('img', { 
-            style: 'width: 60px;position: absolute;top: 140px;left: 280px;', 
-            src: Blockly.utils.getRuntimeImagePath('dialogs/sensor/touch.png') 
-        });
-        var hand = goog.dom.createDom('img', { 
-            style: 'width: 80px;position: absolute;top: 80px;left: 280px;animation: 1s bell-ballList-hand-top infinite alternate;', 
-            src: Blockly.utils.getRuntimeImagePath('dialogs/sensor/hand_top.png') 
-        });
+        var wallStyle = 'width: 400px;margin-left: 80px;margin-top: 40px;';
+        var wall = document.createElement('img');
+        wall.style = wallStyle;
+        wall.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/wall_near.png'));
+
+        var ballStyle = 'width: 60px;position: absolute;top: 140px;left: 280px;';
+        var ball = document.createElement('img');
+        ball.style = ballStyle;
+        ball.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/touch.png'));
+
+        var handStyle = 'width: 80px;position: absolute;top: 80px;left: 280px;animation: 1s bell-ballList-hand-top infinite alternate;';
+        var hand = document.createElement('img');
+        hand.style = handStyle;
+        hand.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/hand_top.png'));
 
         topPane.appendChild(wall);
         topPane.appendChild(ball);
@@ -438,11 +440,19 @@ export default function (Blockly) {
         //disabled
         // show dialog 开启定时器 发送数据
         // hide dialog 销毁定时器
-        var indicatorLabel = goog.dom.createDom('label', { class: 'bell-ballList-indicatorLabel disabled', style: 'top: 80px;' });
-        var indicatorLabelTitle = goog.dom.createDom('span', { class: 'title' });
-        var indicatorLabelSubtitle = goog.dom.createDom('span', { class: 'subtitle', innerHTML: 'Touch' });
-        goog.dom.appendChild(indicatorLabel, indicatorLabelTitle);
-        goog.dom.appendChild(indicatorLabel, indicatorLabelSubtitle);
+        var indicatorLabel = document.createElement('label');
+        indicatorLabel.className = 'bell-ballList-indicatorLabel disabled';
+        indicatorLabel.style.top = '80px';
+
+        var indicatorLabelTitle = document.createElement('span');
+        indicatorLabelTitle.className = 'title'
+
+        var indicatorLabelSubtitle = document.createElement('span');
+        indicatorLabelSubtitle.className = 'subtitle';
+        indicatorLabelSubtitle.innerHTML = 'Touch';
+
+        indicatorLabel.appendChild(indicatorLabelTitle);
+        indicatorLabel.appendChild(indicatorLabelSubtitle);
         topPane.appendChild(indicatorLabel);
 
         var bottomPane = Blockly.Dialogs.generateBottomPane(ballList, multiMode, focusSeq, onChange);
@@ -468,17 +478,28 @@ export default function (Blockly) {
         var topPane = document.createElement('div');
         topPane.className = 'bell-ballList-indicateBallContainer';
 
-        var colorDiv = goog.dom.createDom('div', { style: 'width:400px;height:60px;margin-left:80px;margin-top:40px;' });
-        var ball = goog.dom.createDom('img', { style: 'width: 60px;position: absolute;top: 70px;left: 150px;', src: Blockly.utils.getRuntimeImagePath('dialogs/sensor/color_ball.png') });
+        var colorStyle = 'width:400px;height:60px;margin-left:80px;margin-top:40px;';
+        var colorDiv = document.createElement('div');
+        colorDiv.style = colorStyle;
+
+        var ballStyle = 'width: 60px;position: absolute;top: 70px;left: 150px;';
+        var ball = document.createElement('img');
+        ball.style = ballStyle;
+        ball.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/color_ball.png'));
+
         colorDiv.appendChild(ball);
 
-        var waves = []
+        var waves = [];
         for (var i = 0; i < 3; i++) {
-            waves[i] = goog.dom.createDom('img', {
-                style: 'height: 80px;position: absolute;top: 60px;left:' + (220 + 10 * i) + 'px;' +
-                    'animation: 1s ' + 'bell-ballList-wave' + (i + 1) + ' infinite;',
-                src: Blockly.utils.getRuntimeImagePath('dialogs/color/wave' + (i + 1) + '.png')
-            });
+            var waveStyle = 'height: 80px;position: absolute;top: 60px;left:' + (220 + 10 * i) + 'px;' +
+                'animation: 1s ' + 'bell-ballList-wave' + (i + 1) + ' infinite;';
+            var createImg = document.createElement('img');
+            createImg.style = waveStyle;
+            createImg.style.left = (220 + 10 * i) + 'px;';
+
+            createImg.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/color/wave' + (i + 1) + '.png'));
+            waves[i] = createImg;
+
             colorDiv.appendChild(waves[i]);
         }
         topPane.appendChild(colorDiv);
@@ -506,10 +527,25 @@ export default function (Blockly) {
         var topPane = document.createElement('div');
         topPane.className = 'bell-ballList-indicateBallContainer';
 
-        var wall = goog.dom.createDom('img', { style: 'width: 400px;margin-left: 80px;margin-top: 40px;', src: Blockly.utils.getRuntimeImagePath('dialogs/sensor/wall_far.png') });
-        var line = goog.dom.createDom('div', { style: 'display: inline-block;width: 160px;height: 2px;background: gray;top: 120px;left: 230px;position: absolute;animation: 1s bell-ballList-line-width infinite alternate;' });
-        var ball = goog.dom.createDom('img', { style: 'width: 60px;position: absolute;top: 90px;left: 160px;', src: Blockly.utils.getRuntimeImagePath('dialogs/sensor/infrared.png') });
-        var hand = goog.dom.createDom('img', { style: 'height: 80px;position: absolute;top: 80px;left: 400px;animation: 1s bell-ballList-hand-left infinite alternate;', src: Blockly.utils.getRuntimeImagePath('dialogs/sensor/hand_right.png') });
+
+        var wallStyle = 'width: 400px;margin-left: 80px;margin-top: 40px;';
+        var wall = document.createElement('img');
+        wall.style = wallStyle;
+        wall.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/wall_far.png'));
+
+        var ballStyle = 'width: 60px;position: absolute;top: 90px;left: 160px;';
+        var ball = document.createElement('img');
+        ball.style = ballStyle;
+        ball.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/infrared.png'));
+
+        var handStyle = 'height: 80px;position: absolute;top: 80px;left: 400px;animation: 1s bell-ballList-hand-left infinite alternate;';
+        var hand = document.createElement('img');
+        hand.style = handStyle;
+        hand.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/hand_right.png'));
+
+        var lineStyle = 'display: inline-block;width: 160px;height: 2px;background: gray;top: 120px;left: 230px;position: absolute;animation: 1s bell-ballList-line-width infinite alternate;';
+        var line = document.createElement('div');
+        line.style = lineStyle;
 
         topPane.appendChild(wall);
         topPane.appendChild(ball);
@@ -519,11 +555,19 @@ export default function (Blockly) {
         //disabled
         // show dialog 开启定时器 发送数据
         // hide dialog 销毁定时器
-        var indicatorLabel = goog.dom.createDom('label', { class: 'bell-ballList-indicatorLabel disabled', style: 'top: 80px;' });
-        var indicatorLabelTitle = goog.dom.createDom('span', { class: 'title' });
-        var indicatorLabelSubtitle = goog.dom.createDom('span', { class: 'subtitle' });
-        goog.dom.appendChild(indicatorLabel, indicatorLabelTitle);
-        goog.dom.appendChild(indicatorLabel, indicatorLabelSubtitle);
+        var indicatorLabel = document.createElement('label');
+        indicatorLabel.className = 'bell-ballList-indicatorLabel disabled';
+        indicatorLabel.style.top = '80px';
+
+        var indicatorLabelTitle = document.createElement('span');
+        indicatorLabelTitle.className = 'title'
+
+        var indicatorLabelSubtitle = document.createElement('span');
+        indicatorLabelSubtitle.className = 'subtitle';
+        indicatorLabelSubtitle.innerHTML = 'Touch';
+
+        indicatorLabel.appendChild(indicatorLabelTitle);
+        indicatorLabel.appendChild(indicatorLabelSubtitle);
         topPane.appendChild(indicatorLabel);
 
         var bottomPane = Blockly.Dialogs.generateBottomPane(ballList, multiMode, focusSeq, onChange);

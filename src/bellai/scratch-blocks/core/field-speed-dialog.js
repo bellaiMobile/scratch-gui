@@ -1,3 +1,4 @@
+import inherits from './inherits';
 export default function (Blockly) {
     Blockly.FieldSpeedDialog = function (defaultValue, min, max) {
         if (!isNaN(min) && !isNaN(max) && max > min) {
@@ -9,7 +10,7 @@ export default function (Blockly) {
         this.setValue(defaultValue);
         this.innerData_ = defaultValue;
     }
-    goog.inherits(Blockly.FieldSpeedDialog, Blockly.FieldTextInput);
+    inherits(Blockly.FieldSpeedDialog, Blockly.FieldTextInput);
 
     Blockly.FieldSpeedDialog.fromJson = function (element) {
         return new Blockly.FieldSpeedDialog(element.defaultValue, element.min, element.max);
@@ -30,47 +31,45 @@ export default function (Blockly) {
     Blockly.FieldSpeedDialog.prototype.max = Blockly.FieldSpeedDialog.MAX_VAL; // default
 
     Blockly.FieldSpeedDialog.prototype.showEditor_ = function () {
-        var container_box = goog.dom.createDom('div', {});
+        var container_box = document.createElement('div');
+        var div = document.createElement('div');
+        div.className = 'bell-speed-dialog';
 
-        var div = goog.dom.createDom('div', {
-            'class': 'bell-speed-dialog'
-        });
         this.container_ = div;
-        goog.dom.appendChild(container_box, div);
+        container_box.appendChild(div);
 
-        var speedContainer = goog.dom.createDom('div', {
-            'class': 'bell-speed-container'
-        });
-        goog.dom.appendChild(div, speedContainer);
+        var speedContainer = document.createElement('div');
+        speedContainer.className = 'bell-speed-container';
+        div.appendChild(speedContainer);
 
         // minus and plus buttons
-        var minus = goog.dom.createDom('img', {
-            'class': 'bell-speed-minus',
-            'src': Blockly.utils.getRuntimeImagePath('dialogs/speed/minus.png'),
-        });
-        goog.dom.appendChild(speedContainer, minus);
-        var plus = goog.dom.createDom('img', {
-            'class': 'bell-speed-plus',
-            'src': Blockly.utils.getRuntimeImagePath('dialogs/speed/plus.png'),
-        });
-        goog.dom.appendChild(speedContainer, plus);
+        var minus = document.createElement('img');
+        minus.className = 'bell-speed-minus';
+        minus.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/speed/minus.png'));
+        speedContainer.appendChild(minus);
+
+        var plus = document.createElement('img');
+        plus.className = 'bell-speed-plus';
+        plus.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/speed/plus.png'));
+        speedContainer.appendChild(plus);
 
         // text labels
-        var label = goog.dom.createDom('label', {
-            'class': 'bell-speed-label-start'
-        });
+        var label = document.createElement('label');
+        label.className = 'bell-speed-label-start';
         label.innerHTML = String(this.min);
-        goog.dom.appendChild(speedContainer, label);
-        label = goog.dom.createDom('label', {
-            'class': 'bell-speed-label-center'
-        });
+        speedContainer.appendChild(label);
+
+        var labelCenter = document.createElement('label');
+        labelCenter.className = 'bell-speed-label-center';
+        label = labelCenter;
         label.innerHTML = String(parseInt((this.max - this.min) / 2));
-        goog.dom.appendChild(speedContainer, label);
-        label = goog.dom.createDom('label', {
-            'class': 'bell-speed-label-end'
-        });
+        speedContainer.appendChild(label);
+
+        var labelEnd = document.createElement('label');
+        labelEnd.className = 'bell-speed-label-end';
+        label = labelEnd;
         label.innerHTML = String(this.max);
-        goog.dom.appendChild(speedContainer, label);
+        speedContainer.appendChild(label);
 
         var svg = Blockly.utils.createSvgElement('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
@@ -79,19 +78,19 @@ export default function (Blockly) {
             style: 'position: absolute; left: 30px; height: 50px; top: 50%; transform: translate(0, -50%);padding: 0px 10px;box-sizing: content-box; overflow: inherit;'
         });
 
-        goog.dom.appendChild(speedContainer, svg);
+        speedContainer.appendChild(svg);
         var roundedRect = Blockly.utils.createSvgElement('path', {
             fill: 'none',
             stroke: 'rgb(39, 184, 239)',
             'stroke-width': '1',
             d: 'm 25,0 h260 a 25, 25 0 0 1 25 25 a 25, 25 0 0 1 -25, 25 h-260 a25,25 0 0 1 -25,-25 a 25, 25 0 0 1 25, -25z'
         });
-        goog.dom.appendChild(svg, roundedRect);
+        svg.appendChild(roundedRect);
         var roundedRectProgress = Blockly.utils.createSvgElement('path', {
             fill: 'rgb(39, 184, 239)',
             d: 'm 25,0 h260 a 25, 25 0 0 1 25 25 a 25, 25 0 0 1 -25, 25 h-260 a25,25 0 0 1 -25,-25 a 25, 25 0 0 1 25, -25z'
         });
-        goog.dom.appendChild(svg, roundedRectProgress);
+        svg.appendChild(roundedRectProgress);
         var circleOutter = Blockly.utils.createSvgElement('circle', {
             stroke: 'rgb(39, 184, 239)',
             'stroke-width': '3',
@@ -101,7 +100,7 @@ export default function (Blockly) {
             r: '26',
             class: 'draggable'
         });
-        goog.dom.appendChild(svg, circleOutter);
+        svg.appendChild(circleOutter);
         var circleInner = Blockly.utils.createSvgElement('circle', {
             fill: 'rgb(229, 248, 255)',
             cx: '80',
@@ -109,7 +108,7 @@ export default function (Blockly) {
             r: '20'
         });
         circleInner.style.cssText = "pointer-events: none;";
-        goog.dom.appendChild(svg, circleInner);
+        svg.appendChild(circleInner);
         label = Blockly.utils.createSvgElement('text', {
             x: '80',
             y: '30',
@@ -118,7 +117,7 @@ export default function (Blockly) {
         });
         label.innerHTML = '40';
         label.style.cssText = "pointer-events: none;";
-        goog.dom.appendChild(svg, label);
+        svg.appendChild(label);
         // 具体刻度值
         var innerLabel = Blockly.utils.createSvgElement('rect', {
             fill: '#78dd99',
@@ -129,7 +128,7 @@ export default function (Blockly) {
             width: '50',
             height: '40'
         });
-        goog.dom.appendChild(svg, innerLabel);
+        svg.appendChild(innerLabel);
         var innerLabel2 = Blockly.utils.createSvgElement('rect', {
             fill: '#78dd99',
             x: '0',
@@ -138,7 +137,7 @@ export default function (Blockly) {
             height: '15',
             transform: 'rotate(45 0 -40)'
         });
-        goog.dom.appendChild(svg, innerLabel2);
+        svg.appendChild(innerLabel2);
         var label2 = Blockly.utils.createSvgElement('text', {
             x: '80',
             y: '-42',
@@ -146,13 +145,14 @@ export default function (Blockly) {
             'text-anchor': 'middle'
         });
         label2.innerHTML = '40';
-        goog.dom.appendChild(svg, label2);
+
+        svg.appendChild(label2);
 
         // 确认按钮
-        var saveBtn = goog.dom.createDom('div', {
-            'class': 'bell-field-dialog-btn'
-        });
-        goog.dom.appendChild(div, saveBtn);
+        var saveBtn = document.createElement('div');
+        saveBtn.className = 'bell-field-dialog-btn';
+        div.appendChild(saveBtn);
+
         Blockly.bindEvent_(saveBtn, 'mousedown', null, (e) => {
             // 删除语句块时， 如果结果是int 会提示不是node类型， 需要将结果转换为string
             this.setText(this.getText());

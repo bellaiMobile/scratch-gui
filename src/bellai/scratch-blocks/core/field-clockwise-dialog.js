@@ -1,3 +1,4 @@
+import inherits from './inherits';
 export default function (Blockly) {
     // [顺时针, 逆时针]
     Blockly.FieldClockwiseDialog = function (defaultValue) {
@@ -9,7 +10,7 @@ export default function (Blockly) {
         this.setValue(defaultValue);
     }
 
-    goog.inherits(Blockly.FieldClockwiseDialog, Blockly.FieldDropdown);
+    inherits(Blockly.FieldClockwiseDialog, Blockly.FieldDropdown);
 
     Blockly.FieldClockwiseDialog.fromJson = function (element) {
         return new Blockly.FieldClockwiseDialog(element.defaultValue);

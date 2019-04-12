@@ -1,4 +1,5 @@
 import inherits from './inherits';
+var mobile = require('is-mobile');
 export default function (Blockly) {
     Blockly.FieldAngleDialog = function (defaultValue, steeringGearType) {
 
@@ -24,7 +25,7 @@ export default function (Blockly) {
         this.innerData_ = defaultValue;
     }
 
-    goog.inherits(Blockly.FieldAngleDialog, Blockly.FieldTextInput);
+    inherits(Blockly.FieldAngleDialog, Blockly.FieldTextInput);
 
     Blockly.FieldAngleDialog.fromJson = function (element) {
         return new Blockly.FieldAngleDialog(element.defaultValue,
@@ -71,9 +72,6 @@ export default function (Blockly) {
         //console.log(pointerPath);
         var container = document.createElement('div');
         container.className = 'bell-angle-dialog-top-container';
-        // var container = goog.dom.createDom('div', {
-        //     'class': 'bell-angle-dialog-top-container'
-        // });
 
         var svg = Blockly.utils.createSvgElement('svg', {
             'xmlns': 'http://www.w3.org/2000/svg',
@@ -120,45 +118,47 @@ export default function (Blockly) {
                 ',' + Number(panelHeight / 2 + outRadius / 2 + offsetY) + ')'
         }, svg);
 
-        var div = goog.dom.createDom('div', {
-            'style': 'position:absolute;z-index:1001;' +
-                'top:' + Number(panelHeight / 2 + outRadius / 2 + offsetY - 10) + 'px;' +
-                'left:' + Number(panelWidth / 2 - 25) + 'px;',
-        })
+        var div = document.createElement('div');
+        div.style.position = 'absolute';
+        div.style.zIndex = '1001';
+        div.style.top = Number(panelHeight / 2 + outRadius / 2 + offsetY - 10) + 'px';
+        div.style.left = Number(panelWidth / 2 - 25) + 'px';
 
         //根据平台判断内联css样式
         var inputStyle = 'border-radius:10px;width:50px;text-align:center;background:#76cff0;';
-        if (goog.userAgent.ASSUME_IPAD || goog.userAgent.ASSUME_IPHONE) {
+        // if (goog.userAgent.ASSUME_IPAD || goog.userAgent.ASSUME_IPHONE) {
+        if (mobile()) {
             inputStyle = 'border-radius:10px;width:50px;text-align:center;background:#76cff0;opacity:1;border:none;';
         }
 
         //显示刻度input
-        this.label = goog.dom.createDom('input', {
-            'type': 'text',
-            'style': inputStyle,
-            'disabled': 'disabled',
-        });
+        this.label = document.createElement('input');
+        this.label.style = inputStyle;
+        this.label.setAttribute('type', 'text');
+        this.label.setAttribute('disabled', 'disabled');
         this.label.value = this.innerData_;
 
         //标度
-        var text1 = goog.dom.createDom('div', {
-            'style': 'position:absolute;z-index:1001;' +
-                'top:' + Number(panelHeight / 2 + outRadius / 2 + offsetY - 15) + 'px;' +
-                'left:' + Number(panelWidth / 9 - 5) + 'px;',
-        }, "-75");
+        var text1 = document.createElement('div');
+        text1.style.position = 'absolute';
+        text1.style.zIndex = '1001';
+        text1.style.top = Number(panelHeight / 2 + outRadius / 2 + offsetY - 15) + 'px';
+        text1.style.left = Number(panelWidth / 9 - 5) + 'px';
+        text1.innerText = '-75';
 
-        var text2 = goog.dom.createDom('div', {
-            'style': 'position:absolute;z-index:1001;' +
-                'top:' + Number(panelHeight / 2 + outRadius / 2 + offsetY - 15) + 'px;' +
-                'right:' + Number(panelWidth / 9) + 'px;',
-        }, "75");
+        var text2 = document.createElement('div');
+        text2.style.position = 'absolute';
+        text2.style.zIndex = '1001';
+        text2.style.top = Number(panelHeight / 2 + outRadius / 2 + offsetY - 15) + 'px';
+        text2.style.right = Number(panelWidth / 9) + 'px';
+        text2.innerText = '75';
 
-        goog.dom.appendChild(dom, container);
-        goog.dom.appendChild(container, svg);
-        goog.dom.appendChild(container, div);
-        goog.dom.appendChild(div, this.label);
-        goog.dom.appendChild(container, text1);
-        goog.dom.appendChild(container, text2);
+        div.appendChild(this.label);
+        container.appendChild(svg);
+        container.appendChild(div);
+        container.appendChild(text1);
+        container.appendChild(text2);
+        dom.appendChild(container);
 
         var high = 9999; //Blockly.__DEV__ ? 9999 : Cmd.Priority.HIGH;
         var low = 1; //Blockly.__DEV__ ? 1 : Cmd.Priority.LOW;
@@ -185,10 +185,9 @@ export default function (Blockly) {
         });
         this.reloadUI(); //需调用，改变UI
         // 确认按钮
-        var saveBtn = goog.dom.createDom('div', {
-            'class': 'bell-field-dialog-btn'
-        });
-        goog.dom.appendChild(dom, saveBtn);
+        var saveBtn = document.createElement('div');
+        saveBtn.className = 'bell-field-dialog-btn';
+        dom.appendChild(saveBtn);
         Blockly.bindEvent_(saveBtn, 'mousedown', null, (e) => {
             // 删除语句块时， 如果结果是int 会提示不是node类型， 需要将结果转换为string
             this.setText(this.innerData_);

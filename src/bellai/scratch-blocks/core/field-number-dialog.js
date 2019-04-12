@@ -1,3 +1,4 @@
+import inherits from './inherits';
 export default function (Blockly) {
     Blockly.FieldNumberDialog = function (defaultValue) {
         this.numList = [];
@@ -10,7 +11,7 @@ export default function (Blockly) {
         this.innerData_ = defaultValue;
     }
 
-    goog.inherits(Blockly.FieldNumberDialog, Blockly.FieldTextInput);
+    inherits(Blockly.FieldNumberDialog, Blockly.FieldTextInput);
 
     // 显示框引用
     Blockly.FieldNumberDialog.prototype.labelNode = null;
@@ -24,31 +25,27 @@ export default function (Blockly) {
 
     Blockly.FieldNumberDialog.prototype.showEditor_ = function () {
         var dom = document.createElement("div");
-        dom.setAttribute("class", "bell-field-number-dialog");
+        dom.className = 'bell-field-number-dialog';
         // 输入框
-        var input = goog.dom.createDom('div', {
-            class: 'bell-field-number-input'
-        });
+        var input = document.createElement("div");
+        input.className = 'bell-field-number-input';
+        dom.appendChild(input);
 
-        goog.dom.appendChild(dom, input);
         // 数字框
-        this.labelNode = goog.dom.createDom('span')
-        goog.dom.appendChild(input, this.labelNode);
+        this.labelNode = document.createElement("span");
+        input.appendChild(this.labelNode);
         // 删除
-        // var del = goog.dom.createDom('img', {src: Blockly.getImagesPath() + 'dialog/close.png', alt: 'X'});
-        var del = goog.dom.createDom('div', {
-            class: 'bell-field-number-del'
-        });
-        goog.dom.appendChild(input, del);
-        goog.events.listen(del, goog.events.EventType.CLICK, function () {
-            this.getInput(-1);
-        }, false, this);
+        var del = document.createElement("div");
+        del.className = 'bell-field-number-del';
+        input.appendChild(del);
 
-        // 珊格
-        var grid = goog.dom.createDom('div', {
-            class: 'bell-field-number-numpad'
+        Blockly.bindEvent_(del,'mouseup',this,() => {
+            this.getInput(-1);
         });
-        goog.dom.appendChild(dom, grid);
+        // 珊格
+        var grid = document.createElement("div");
+        grid.className = 'bell-field-number-numpad';
+        dom.appendChild(grid);
 
         function captureClick(index) {
             return function () {
@@ -57,26 +54,28 @@ export default function (Blockly) {
         }
         var numSymbol = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '+/-', '0', '.'];
         for (var i = 0; i < numSymbol.length; i++) {
-            var gridItem = goog.dom.createDom('div', {
-                class: 'bell-field-number-grid-item'
-            });
-            goog.dom.appendChild(grid, gridItem);
+            var gridItem = document.createElement("div");
+            gridItem.className = 'bell-field-number-grid-item';
+            grid.appendChild(gridItem);
+
             this.numList.push(gridItem);
-            var num = goog.dom.createDom('button', {
-                class: i % 3 == 2 ? 'bell-field-number-num right-edge' : 'bell-field-number-num'
-            });
-            goog.dom.appendChild(gridItem, num);
-            goog.dom.appendChild(num, goog.dom.createDom('span', {}, numSymbol[i]));
+            var num = document.createElement('button');
+            num.className = i % 3 == 2 ? 'bell-field-number-num right-edge' : 'bell-field-number-num';
+            gridItem.appendChild(num);
+
+            var spanTxt = document.createElement('span');
+            spanTxt.innerText = numSymbol[i];
+            num.appendChild(spanTxt);
 
             var event = Blockly.bindEvent_(gridItem, 'click', this, captureClick(i));
             this.eventWrapper.push(event);
         }
         this.reloadUI(); //需调用，改变UI
         // 确认按钮
-        var saveBtn = goog.dom.createDom('div', {
-            'class': 'bell-field-dialog-btn'
-        });
-        goog.dom.appendChild(dom, saveBtn);
+        var saveBtn = document.createElement('div');
+        saveBtn.className = 'bell-field-dialog-btn';
+        dom.appendChild(saveBtn);
+
         Blockly.bindEvent_(saveBtn, 'mousedown', null, (e) => {
             // 删除语句块时， 如果结果是int 会提示不是node类型， 需要将结果转换为string
             this.setText(this.getValue());
@@ -86,6 +85,7 @@ export default function (Blockly) {
         var me = this;
         Blockly.DialogDiv.show(dom, function () {
             Blockly.unbindEvent_(saveBtn);
+            Blockly.unbindEvent_(del);
             // 点击空白区域取消 恢复当前设置的值
             me.innerData_ = me.text_;
         });

@@ -1,3 +1,4 @@
+import inherits from './inherits';
 export default function (Blockly) {
     /**
      * 阻塞和非阻塞
@@ -9,7 +10,7 @@ export default function (Blockly) {
         this.setValue(src);
     };
 
-    goog.inherits(Blockly.FieldImageDialog, Blockly.FieldImage); // 继承image
+    inherits(Blockly.FieldImageDialog, Blockly.FieldImage); // 继承image
 
     Blockly.FieldImageDialog.fromJson = function (element) {
         return new Blockly.FieldImageDialog(element.src, element.width, element.height);

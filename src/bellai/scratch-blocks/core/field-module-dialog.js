@@ -1,3 +1,4 @@
+import inherits from './inherits';
 export default function (Blockly) {
     // 外形borrow自scratch-blocks中的field_dropdown
     Blockly.FieldModuleDialog = function (defaultValue, module, multiMode) {
@@ -10,7 +11,7 @@ export default function (Blockly) {
             throw 'Unknown module: ' + module;
         }
     };
-    goog.inherits(Blockly.FieldModuleDialog, Blockly.FieldDropdown);
+    inherits(Blockly.FieldModuleDialog, Blockly.FieldDropdown);
 
     Blockly.FieldModuleDialog.fromJson = function (element) {
         return new Blockly.FieldModuleDialog(element.defaultValue,
