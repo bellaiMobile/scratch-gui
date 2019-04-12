@@ -14,7 +14,7 @@ export default function (Blockly) {
 
     Blockly.FieldColurDialog.prototype.showEditor_ = function () {
         var div = document.createElement('div');
-        var row = document.createElement(div);
+        var row = document.createElement('div');
         row.className = 'bell-colour-dialog';
 
         for (var i = 0; i < this.columns_.length; i++) {

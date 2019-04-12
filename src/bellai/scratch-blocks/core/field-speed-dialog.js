@@ -45,12 +45,12 @@ export default function (Blockly) {
         // minus and plus buttons
         var minus = document.createElement('img');
         minus.className = 'bell-speed-minus';
-        minus.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/speed/minus.png'));
+        minus.setAttribute('src', require('../../static/images/dialogs/speed/minus.png'));
         speedContainer.appendChild(minus);
 
         var plus = document.createElement('img');
         plus.className = 'bell-speed-plus';
-        plus.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/speed/plus.png'));
+        plus.setAttribute('src', require('../../static/images/dialogs/speed/plus.png'));
         speedContainer.appendChild(plus);
 
         // text labels

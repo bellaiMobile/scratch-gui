@@ -184,6 +184,12 @@ module.exports = [
             new CopyWebpackPlugin([{
                 from: 'extension-worker.{js,js.map}',
                 context: 'node_modules/scratch-vm/dist/web'
+            }]),
+            // note:
+            // import dialog css file
+            new CopyWebpackPlugin([{
+                from: 'src/bellai/static',
+                to: './bell/'
             }])
         ])
     })

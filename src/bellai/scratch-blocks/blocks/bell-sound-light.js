@@ -96,7 +96,7 @@ export default function (Blockly) {
                     {
                         "type": "field_clockwise_image",
                         "name": "BLOCK",
-                        "src": Blockly.utils.getRuntimeImagePath('blk_ic_blocked.png'),
+                        "src": require('../../static/images/blk_ic_blocked.png'),
                         "width": 24,
                         "height": 24,
                     },
@@ -262,7 +262,7 @@ export default function (Blockly) {
                     {
                         "type": "field_clockwise_image",
                         "name": "BLOCK",
-                        "src": Blockly.utils.getRuntimeImagePath('blk_ic_blocked.png'),
+                        "src": require('../../static/images/blk_ic_blocked.png'),
                         "width": 24,
                         "height": 24,
                     },
@@ -404,7 +404,7 @@ export default function (Blockly) {
                     {
                         "type": "field_clockwise_image",
                         "name": "BLOCK",
-                        "src": Blockly.utils.getRuntimeImagePath('blk_ic_blocked.png'),
+                        "src": require('../../static/images/blk_ic_blocked.png'),
                         "width": 24,
                         "height": 24,
                     },

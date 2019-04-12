@@ -6,6 +6,7 @@ import meowWav from '!arraybuffer-loader!./83c36d806dc92327b9e7049a565c6bff.wav'
 import backdrop from '!raw-loader!./cd21514d0531fdffb22204e0ec5ed84a.svg';
 import costume1 from '!raw-loader!./09dc888b0b7df19f70d81588ae73420e.svg';
 import costume2 from '!raw-loader!./3696356a03a8d938318876a593572843.svg';
+import costume3 from '!arraybuffer-loader!./df8a4da4692090503fee7c1848784e85.png'; //png 图片为二进制格式 arraybuffer 转换为二进制
 /* eslint-enable import/no-unresolved */
 
 const defaultProject = translator => {
@@ -49,6 +50,11 @@ const defaultProject = translator => {
         assetType: 'ImageVector',
         dataFormat: 'SVG',
         data: encoder.encode(costume2)
+    },{
+        id: 'df8a4da4692090503fee7c1848784e85',
+        assetType: 'ImageBitmap',
+        dataFormat: 'PNG',
+        data: new Uint8Array(costume3)
     }];
 };
 

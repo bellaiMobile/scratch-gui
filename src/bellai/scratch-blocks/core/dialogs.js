@@ -76,8 +76,7 @@ export default function (Blockly) {
         topPane.style.boxSizing = 'border-box';
         topPane.style.padding = Math.min(window.innerWidth, window.innerHeight) / 40 + 'px';
         var img = document.createElement('img');
-        img.setAttribute('src',
-            Blockly.utils.getRuntimeImagePath(imgUrl));
+        img.setAttribute('src', require('../../static/images/'+imgUrl));
         img.style.height = '100%';
         topPane.appendChild(img);
         return topPane;
@@ -163,8 +162,7 @@ export default function (Blockly) {
         okButton.style.left = '50%';
         okButton.style.bottom = '0px';
         okButton.style.transform = 'translate(-50%, 50%)';
-        okButton.setAttribute('src',
-            Blockly.utils.getRuntimeImagePath('dialogs/ok.png'));
+        okButton.setAttribute('src', require('../../static/images/dialogs/ok.png'));
 
         eventWrappers.push(
             Blockly.bindEvent_(gridPane, 'mouseup', null, function (e) {
@@ -332,7 +330,7 @@ export default function (Blockly) {
             listItem.style.boxSizing = 'border-box';
 
             var itemImg = document.createElement('img');
-            itemImg.setAttribute("src", Blockly.utils.getRuntimeImagePath(arrs[i].imgUrl));
+            itemImg.setAttribute("src", require('../../static/images/' + arrs[i].imgUrl));
             itemImg.style.width = '60px';
             itemImg.style.height = '60px';
 
@@ -421,17 +419,17 @@ export default function (Blockly) {
         var wallStyle = 'width: 400px;margin-left: 80px;margin-top: 40px;';
         var wall = document.createElement('img');
         wall.style = wallStyle;
-        wall.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/wall_near.png'));
+        wall.setAttribute('src', require('../../static/images/dialogs/sensor/wall_near.png'));
 
         var ballStyle = 'width: 60px;position: absolute;top: 140px;left: 280px;';
         var ball = document.createElement('img');
         ball.style = ballStyle;
-        ball.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/touch.png'));
+        ball.setAttribute('src', require('../../static/images/dialogs/sensor/touch.png'));
 
         var handStyle = 'width: 80px;position: absolute;top: 80px;left: 280px;animation: 1s bell-ballList-hand-top infinite alternate;';
         var hand = document.createElement('img');
         hand.style = handStyle;
-        hand.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/hand_top.png'));
+        hand.setAttribute('src', require('../../static/images/dialogs/sensor/hand_top.png'));
 
         topPane.appendChild(wall);
         topPane.appendChild(ball);
@@ -485,7 +483,7 @@ export default function (Blockly) {
         var ballStyle = 'width: 60px;position: absolute;top: 70px;left: 150px;';
         var ball = document.createElement('img');
         ball.style = ballStyle;
-        ball.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/color_ball.png'));
+        ball.setAttribute('src', require('../../static/images/dialogs/sensor/color_ball.png'));
 
         colorDiv.appendChild(ball);
 
@@ -497,7 +495,7 @@ export default function (Blockly) {
             createImg.style = waveStyle;
             createImg.style.left = (220 + 10 * i) + 'px;';
 
-            createImg.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/color/wave' + (i + 1) + '.png'));
+            createImg.setAttribute('src', require('../../static/images/dialogs/color/wave' + (i + 1) + '.png'));
             waves[i] = createImg;
 
             colorDiv.appendChild(waves[i]);
@@ -531,17 +529,17 @@ export default function (Blockly) {
         var wallStyle = 'width: 400px;margin-left: 80px;margin-top: 40px;';
         var wall = document.createElement('img');
         wall.style = wallStyle;
-        wall.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/wall_far.png'));
+        wall.setAttribute('src', require('../../static/images/dialogs/sensor/wall_far.png'));
 
         var ballStyle = 'width: 60px;position: absolute;top: 90px;left: 160px;';
         var ball = document.createElement('img');
         ball.style = ballStyle;
-        ball.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/infrared.png'));
+        ball.setAttribute('src', require('../../static/images/dialogs/sensor/infrared.png'));
 
         var handStyle = 'height: 80px;position: absolute;top: 80px;left: 400px;animation: 1s bell-ballList-hand-left infinite alternate;';
         var hand = document.createElement('img');
         hand.style = handStyle;
-        hand.setAttribute('src', Blockly.utils.getRuntimeImagePath('dialogs/sensor/hand_right.png'));
+        hand.setAttribute('src', require('../../static/images/dialogs/sensor/hand_right.png'));
 
         var lineStyle = 'display: inline-block;width: 160px;height: 2px;background: gray;top: 120px;left: 230px;position: absolute;animation: 1s bell-ballList-line-width infinite alternate;';
         var line = document.createElement('div');
@@ -613,9 +611,9 @@ export default function (Blockly) {
                     return;
                 } else {
                     if (e.target === listBox.childNodes[0] || e.target === listBox.childNodes[0].firstElementChild) {
-                        onChange(Blockly.utils.getRuntimeImagePath('blk_ic_blocked.png'));
+                        onChange(require('../../static/images/blk_ic_blocked.png'));
                     } else {
-                        onChange(Blockly.utils.getRuntimeImagePath('blk_ic_nonblocked.png'));
+                        onChange(require('../../static/images/blk_ic_nonblocked.png'));
                     }
                 }
             })

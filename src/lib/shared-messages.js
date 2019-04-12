@@ -11,10 +11,20 @@ export default defineMessages({
         description: 'Default name for a new costume, scratch will automatically adjust the number if necessary',
         id: 'gui.sharedMessages.costume'
     },
+    costume2: {
+        defaultMessage: 'Mabot',
+        description: 'Default name for a new costume, scratch will automatically adjust the number if necessary',
+        id: 'gui.sharedMessages.costume2'
+    },
     sprite: {
         defaultMessage: 'Sprite{index}',
         description: 'Default name for a new sprite, scratch will automatically adjust the number if necessary',
         id: 'gui.sharedMessages.sprite'
+    },
+    sprite2: {
+        defaultMessage: 'Mabot',
+        description: 'Default name for a new sprite, scratch will automatically adjust the number if necessary',
+        id: 'gui.sharedMessages.sprite2'
     },
     pop: {
         defaultMessage: 'pop',

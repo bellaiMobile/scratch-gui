@@ -16,7 +16,7 @@ import blocksBellMotion from './blocks/bell-motion';
 import blocksbellSoundLight from './blocks/bell-sound-light';
 //blocks tree
 // NOTE: 添加一个机会修改defaultToolbox
-import blocksDefaultToolBox from './blocks/default-toolbox';
+// import blocksDefaultToolBox from './blocks/default-toolbox';
 //diy dialog
 // NOTE: 解决scratch中多行语句块的需求问题
   // 改动点：
@@ -40,6 +40,7 @@ import coreMoudleDialog from './core/field-module-dialog';
 import coreNumberDialog from './core/field-number-dialog';
 import coreSpeedDialog from './core/field-speed-dialog';
 
+import en from '../static/msg/en';
 
 export default (Blockly) => {
 
@@ -70,7 +71,9 @@ export default (Blockly) => {
   blocksbellSoundLight(Blockly);
 
   //blocks tree
-  blocksDefaultToolBox(Blockly);
+  // blocksDefaultToolBox(Blockly);
+  // messages
+  en(Blockly);
 
   global.ScratchBlocks = Blockly;
 };
