@@ -190,6 +190,10 @@ module.exports = [
             new CopyWebpackPlugin([{
                 from: 'src/bellai/static',
                 to: './bell/'
+            }]),
+            new CopyWebpackPlugin([{
+                from: 'src/bellai/cordova',
+                to: './bell/cordova'
             }])
         ])
     })

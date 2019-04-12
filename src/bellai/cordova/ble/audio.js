@@ -5,8 +5,8 @@ var BellAudioManager = {
   AUDIO_TAP: 'tap',
 
   playAudio: function (audio) {
-    var a = new Audio(window.AppDir + '/www/blockly/media/' + audio + '.mp3');
-    a.play();
+    // var a = new Audio(window.AppDir + '/www/blockly/media/' + audio + '.mp3');
+    // a.play();
   },
 
   playAudioConnect: function () {
