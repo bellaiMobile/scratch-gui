@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 import LibraryItem from '../../containers/library-item.jsx';
 import Modal from '../../containers/modal.jsx';
@@ -81,7 +81,8 @@ class LibraryComponent extends React.Component {
             'handleMouseLeave',
             'handleSelect',
             'handleTagClick',
-            'setFilteredDataRef'
+            'setFilteredDataRef',
+            'diyHandleSelect'
         ]);
         this.state = {
             selectedItem: null,
@@ -98,6 +99,11 @@ class LibraryComponent extends React.Component {
     handleSelect (id) {
         this.handleClose();
         this.props.onItemSelected(this.getFilteredData()[id]);
+    }
+    // add diy devices for target
+    diyHandleSelect(id) {
+        this.handleClose();
+        this.props.onItemSelected(this.props.diyDate[id]);
     }
     handleClose () {
         this.props.onRequestClose();
@@ -161,9 +167,68 @@ class LibraryComponent extends React.Component {
                 id={this.props.id}
                 onRequestClose={this.handleClose}
             >
+                {/* 硬件设备 */}
+                {
+                    (this.props.id === 'spriteLibrary') && (
+                        <div className={styles.hardWareDevicesBox}>
+                            <div className={styles.diyDevicesTitle}>硬件设备</div>
+                            <div
+                                className={classNames(styles.libraryScrollGrid)}
+                            >
+                                {this.props.diyDate.map((dataItem, index) => {
+                                    const iconSource = getItemImageSource(dataItem);
+                                    const icons = dataItem.json && dataItem.json.costumes.map(getItemImageSource);
+                                    return (<LibraryItem
+                                        bluetoothRequired={dataItem.bluetoothRequired}
+                                        collaborator={dataItem.collaborator}
+                                        description={dataItem.description}
+                                        disabled={dataItem.disabled}
+                                        extensionId={dataItem.extensionId}
+                                        featured={dataItem.featured}
+                                        hidden={dataItem.hidden}
+                                        iconSource={iconSource}
+                                        icons={icons}
+                                        id={index}
+                                        insetIconURL={dataItem.insetIconURL}
+                                        internetConnectionRequired={dataItem.internetConnectionRequired}
+                                        key={`item_${index}`}
+                                        name={dataItem.name}
+                                        onMouseEnter={this.handleMouseEnter}
+                                        onMouseLeave={this.handleMouseLeave}
+                                        onSelect={this.diyHandleSelect}
+                                    />);
+                                })}
+                            </div>
+                            <div className={styles.diyDevicesPaddingBox}>
+                                <hr />
+                            </div>
+                            <div className={styles.diyDevicesTitle}>角色</div>
+                            <div className={styles.diyDevicesPaddingBox}>
+                                <div 
+                                    className={classNames(styles.diyBtnStyle,styles.filterBarItem)}
+                                    // onClick={() => this.props.onFileUploadClick()}
+                                >
+                                    <FormattedMessage
+                                        defaultMessage="addSpriteFromFile"
+                                        id="gui.spriteSelector.addSpriteFromFile"
+                                    />
+                                </div>
+                                <div 
+                                    className={styles.diyBtnStyle}
+                                    // onClick={() => this.props.onPaintSpriteClick()}
+                                >
+                                    <FormattedMessage
+                                        defaultMessage="addSpriteFromPaint"
+                                        id="gui.spriteSelector.addSpriteFromPaint"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
                 {(this.props.filterable || this.props.tags) && (
                     <div className={styles.filterBar}>
-                        {this.props.filterable && (
+                        {/* {this.props.filterable && (
                             <Filter
                                 className={classNames(
                                     styles.filterBarItem,
@@ -178,7 +243,7 @@ class LibraryComponent extends React.Component {
                         )}
                         {this.props.filterable && this.props.tags && (
                             <Divider className={classNames(styles.filterBarItem, styles.divider)} />
-                        )}
+                        )} */}
                         {this.props.tags &&
                             <div className={styles.tagWrapper}>
                                 {tagListPrefix.concat(this.props.tags).map((tagProps, id) => (
@@ -198,6 +263,7 @@ class LibraryComponent extends React.Component {
                         }
                     </div>
                 )}
+                {/* 扩展、精灵、背景通用列表 */}
                 <div
                     className={classNames(styles.libraryScrollGrid, {
                         [styles.withFilterBar]: this.props.filterable || this.props.tags
@@ -256,7 +322,9 @@ LibraryComponent.propTypes = {
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     tags: PropTypes.arrayOf(PropTypes.shape(TagButton.propTypes)),
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    onPaintSpriteClick: PropTypes.func,
+    onFileUploadClick: PropTypes.func,
 };
 
 LibraryComponent.defaultProps = {

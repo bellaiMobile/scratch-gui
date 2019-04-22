@@ -7,7 +7,8 @@
 }
 
 .body-wrapper {
-    height: calc(100% - $menu-bar-height);
+    /* height: calc(100% - $menu-bar-height); */
+    height: calc(100%);
     background-color: $ui-primary;
 }
 
@@ -317,4 +318,16 @@ $fade-out-distance: 15px;
 */
 :global(.ReactModal__Body--open) {
     overflow: hidden;
+}
+
+.StageAndSpriteDiyStyle{
+    padding: 1rem 0;
+    background-color: $ui-tertiary;
+}
+
+.greenFlagBoxStyle{
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 10;
 }

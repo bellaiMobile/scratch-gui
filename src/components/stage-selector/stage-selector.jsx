@@ -61,7 +61,7 @@ const StageSelector = props => {
     return (
         <Box
             className={classNames(styles.stageSelector, {
-                [styles.isSelected]: selected,
+                // [styles.isSelected]: selected,
                 [styles.raised]: raised || dragOver,
                 [styles.receivedBlocks]: receivedBlocks
             })}
@@ -71,6 +71,14 @@ const StageSelector = props => {
             onMouseLeave={onMouseLeave}
             {...componentProps}
         >
+            
+            {url ? (
+                <img
+                    className={styles.costumeCanvas}
+                    src={url}
+                    onClick={onNewBackdropClick}
+                />
+            ) : null}
             <div className={styles.header}>
                 <div className={styles.headerTitle}>
                     <FormattedMessage
@@ -80,21 +88,16 @@ const StageSelector = props => {
                     />
                 </div>
             </div>
-            {url ? (
-                <img
-                    className={styles.costumeCanvas}
-                    src={url}
-                />
-            ) : null}
-            <div className={styles.label}>
+            {/* <div className={styles.label}>
                 <FormattedMessage
                     defaultMessage="Backdrops"
                     description="Label for the backdrops in the stage selector"
                     id="gui.stageSelector.backdrops"
                 />
             </div>
-            <div className={styles.count}>{backdropCount}</div>
-            <ActionMenu
+            <div className={styles.count}>{backdropCount}</div> */}
+            {/* 舞台添加图片 */}
+            {/* <ActionMenu
                 className={styles.addButton}
                 img={backdropIcon}
                 moreButtons={[
@@ -124,7 +127,7 @@ const StageSelector = props => {
                 title={intl.formatMessage(messages.addBackdropFromLibrary)}
                 tooltipPlace={isRtl(intl.locale) ? 'right' : 'left'}
                 onClick={onNewBackdropClick}
-            />
+            /> */}
         </Box>
     );
 };

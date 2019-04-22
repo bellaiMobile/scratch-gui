@@ -1,19 +1,21 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
+$header-height: calc($stage-menu-height - 2px);
+
 /* @todo: refactor this class name, and component: `sprite-selector` to `sprite` */
 .sprite-selector-item {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     position: relative;
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
     color: $text-primary;
-    border-width: 2px;
+    /* border-width: 2px;
     border-style: solid;
-    border-color: $ui-black-transparent;
+    border-color: $ui-black-transparent; */
     border-radius: $space;
 
     text-align: center;
@@ -21,17 +23,22 @@
 
     user-select: none;
     touch-action: none;
+
+    widows: 92px;
+    justify-content: center;
+    align-items: center;
 }
 
 .sprite-selector-item.is-selected {
-    box-shadow: 0px 0px 0px 4px $motion-transparent;
-    border: 2px solid $motion-primary;
+    /* box-shadow: 0px 0px 0px 4px $motion-transparent; */
+    /* border: 2px solid $motion-primary; */
     background: $ui-white;
 }
 
 .sprite-selector-item:hover {
-    border: 2px solid $motion-primary;
-    background: $ui-white;
+    /* border: 2px solid $motion-primary; */
+    background-color: $ui-white;
+    border-radius: $space;
 }
 
 .sprite-selector-item:hover .sprite-image, .is-selected .sprite-image {
@@ -41,8 +48,11 @@
 /* Outer/Inner chicanery is to prevent layouts when sprite image changes */
 .sprite-image-outer {
     position: relative;
-    width: 100%;
-    height: 100%;
+    margin-top: .25rem;
+    width: 64px;
+    height: 48px;
+    /* width: 100%;
+    height: 100%; */
     transform: translateZ(0);
 }
 
@@ -63,11 +73,18 @@
 }
 
 .sprite-info {
-    padding: 0.25rem;
+    /* padding: 0.25rem;
     border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem; */
+    position: relative;
+    width: 100%;
+    height: $header-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     font-size: 0.625rem;
+    font-weight: bold;
     color: $text-primary;
     user-select: none;
 }
@@ -89,13 +106,15 @@
 }
 
 .is-selected .sprite-info {
-    background: $motion-primary;
-    color: $ui-white;
+    /* background: $motion-primary; */
+    /* color: $ui-white; */
 }
 
 .delete-button {
     position: absolute;
-    top: 0.125rem;
+    /* top: 0.125rem; */
+    top: 50%;
+    transform: translateY(-50%);
     z-index: auto;
 }
 

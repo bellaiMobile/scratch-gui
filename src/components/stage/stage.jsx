@@ -31,7 +31,6 @@ const StageComponent = props => {
         onQuestionAnswered,
         ...boxProps
     } = props;
-
     const stageDimensions = getStageDimensions(stageSize, isFullScreen);
 
     return (

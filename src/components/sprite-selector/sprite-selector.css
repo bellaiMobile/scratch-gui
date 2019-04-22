@@ -6,14 +6,15 @@
     flex-grow: 1;
     position: relative;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin-right: calc($space / 2);
-    background-color: $ui-secondary;
-    border-top-right-radius: $space;
+    /* margin-right: calc($space / 2); */
+    /* background-color: $ui-white; */
+    /* border-top-right-radius: $space;
     border-top-left-radius: $space;
     border-color: $ui-black-transparent;
     border-width: 1px;
     border-style: solid;
-    border-bottom: 0;
+    border-bottom: 0; */
+    margin-left: 1rem;
 }
 
 .sprite-wrapper {
@@ -30,11 +31,14 @@
         @todo: make room for the scrollbar
     */
     box-sizing: border-box;
-    width: calc((100% / $sprites-per-row ) - $space);
+    /* width: calc((100% / $sprites-per-row ) - $space);
     max-width: 6rem;
-    min-width: 4rem;
-    min-height: 4rem; /* @todo: calc height same as width */
-    margin: calc($space / 2);
+    min-width: 4rem; 
+    min-height: 4rem;*/ /* @todo: calc height same as width */
+    /* margin: calc($space / 2); */
+
+    width: 92px;
+    margin-right: 1rem;
 }
 
 .sprite {
@@ -51,7 +55,8 @@
               also introduces a new bug in Chrome when vertically resizing window down,
               then back up, introduces white space in the outside the page container.
     */
-    height: calc(100% - $sprite-info-height);
+    /* height: calc(100% - $sprite-info-height); */
+    height: 100%;
     overflow-y: auto;
 }
 
@@ -64,15 +69,17 @@
     flex-wrap: wrap;
     flex-direction: row;
 
-    padding-top: calc($space / 2);
+    height: 100%;
+    /* padding-top: calc($space / 2);
     padding-left: calc($space / 2);
     padding-right: calc($space / 2);
-    padding-bottom: $space;
+    padding-bottom: $space; */
 }
 
 .add-button {
     position: absolute;
-    bottom: 0.75rem;
+    /* bottom: 0.75rem; */
+    top: -3rem;
 }
 
 [dir="ltr"] .add-button {

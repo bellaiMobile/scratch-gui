@@ -12,4 +12,4 @@ body,
 }
 
 /* @todo: move globally? Safe / side FX, for blocks particularly? */
-* { box-sizing: border-box; }
+* { box-sizing: border-box; outline: none; }

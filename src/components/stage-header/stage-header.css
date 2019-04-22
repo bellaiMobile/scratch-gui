@@ -4,6 +4,7 @@
 
 .stage-header-wrapper {
     position: relative;
+    /* opacity: 0; */
 }
 
 .stage-header-wrapper-overlay {

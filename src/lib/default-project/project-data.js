@@ -113,35 +113,35 @@ const projectData = translateFunction => {
                 rotationStyle: 'all around'
             },
             // mabot robot
-            {
-                isStage: false,
-                name: translator(messages.sprite2, {index: 1}),
-                variables: {},
-                lists: {},
-                broadcasts: {},
-                blocks: {},
-                currentCostume: 0,
-                costumes: [
-                    {
-                        assetId: 'df8a4da4692090503fee7c1848784e85',
-                        name: translator(messages.costume2, {index: 1}),
-                        bitmapResolution: 1,
-                        md5ext: 'df8a4da4692090503fee7c1848784e85.png',
-                        dataFormat: 'png',
-                        rotationCenterX: 48,
-                        rotationCenterY: 50
-                    }
-                ],
-                sounds: [],
-                volume: 100,
-                visible: false,
-                x: 0,
-                y: 0,
-                size: 50,
-                direction: 90,
-                draggable: false,
-                rotationStyle: 'all around'
-            }
+            // {
+            //     isStage: false,
+            //     name: translator(messages.sprite2, {index: 1}),
+            //     variables: {},
+            //     lists: {},
+            //     broadcasts: {},
+            //     blocks: {},
+            //     currentCostume: 0,
+            //     costumes: [
+            //         {
+            //             assetId: 'df8a4da4692090503fee7c1848784e85',
+            //             name: translator(messages.costume2, {index: 1}),
+            //             bitmapResolution: 1,
+            //             md5ext: 'df8a4da4692090503fee7c1848784e85.png',
+            //             dataFormat: 'png',
+            //             rotationCenterX: 48,
+            //             rotationCenterY: 50
+            //         }
+            //     ],
+            //     sounds: [],
+            //     volume: 100,
+            //     visible: true,
+            //     x: 0,
+            //     y: 0,
+            //     size: 50,
+            //     direction: 90,
+            //     draggable: false,
+            //     rotationStyle: 'all around'
+            // }
         ],
         meta: {
             semver: '3.0.0',

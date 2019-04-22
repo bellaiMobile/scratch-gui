@@ -59,3 +59,24 @@
     height: $library-filter-bar-height;
     overflow: hidden;
 }
+
+.hard-ware-devices-box{
+    /* padding: 1rem; */
+}
+.diy-devices-padding-box{
+    padding: 1rem;
+}
+.hard-ware-devices-box .diy-devices-title{
+    padding: 1rem 1rem 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.diy-btn-style{
+    min-width: 80px;
+    padding: .625rem 2rem;
+    display: inline-block;
+    border-radius: .25rem;
+    background-color: $ui-white;
+    font-size: .825rem;
+    cursor: pointer;
+}

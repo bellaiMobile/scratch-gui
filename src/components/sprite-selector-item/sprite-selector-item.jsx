@@ -18,17 +18,18 @@ const SpriteSelectorItem = props => (
                 [styles.isSelected]: props.selected
             }),
             onClick: props.onClick,
-            onMouseEnter: props.onMouseEnter,
-            onMouseLeave: props.onMouseLeave,
-            onMouseDown: props.onMouseDown,
-            onTouchStart: props.onMouseDown
+            // onMouseEnter: props.onMouseEnter,
+            // onMouseLeave: props.onMouseLeave,
+            // onMouseDown: props.onMouseDown,
+            // onTouchStart: props.onMouseDown
         }}
         disable={props.dragging}
+        // holdToDisplay={10}
         id={`${props.name}-${contextMenuId}`}
     >
-        {typeof props.number === 'undefined' ? null : (
+        {/*typeof props.number === 'undefined' ? null : (
             <div className={styles.number}>{props.number}</div>
-        )}
+        )*/}
         {props.costumeURL ? (
             <div className={styles.spriteImageOuter}>
                 <div className={styles.spriteImageInner}>
@@ -41,18 +42,22 @@ const SpriteSelectorItem = props => (
             </div>
         ) : null}
         <div className={styles.spriteInfo}>
-            <div className={styles.spriteName}>{props.name}</div>
-            {props.details ? (
+            <span className={styles.spriteName}>{props.name}</span>
+            {/*props.details ? (
                 <div className={styles.spriteDetails}>{props.details}</div>
-            ) : null}
+            ) : null*/}
+            {(props.selected && props.onDeleteButtonClick) ? (
+                <CloseButton
+                    className={styles.deleteButton}
+                    size={CloseButton.SIZE_SMALL}
+                    // onClick={props.onDeleteButtonClick}
+                    onClick={() => {
+                        
+                    }}
+                />
+            ) : null }
         </div>
-        {(props.selected && props.onDeleteButtonClick) ? (
-            <CloseButton
-                className={styles.deleteButton}
-                size={CloseButton.SIZE_SMALL}
-                onClick={props.onDeleteButtonClick}
-            />
-        ) : null }
+
         {props.onDuplicateButtonClick || props.onDeleteButtonClick || props.onExportButtonClick ? (
             <ContextMenu id={`${props.name}-${contextMenuId++}`}>
                 {props.onDuplicateButtonClick ? (
@@ -64,7 +69,7 @@ const SpriteSelectorItem = props => (
                         />
                     </MenuItem>
                 ) : null}
-                {props.onExportButtonClick ? (
+                {/* {props.onExportButtonClick ? (
                     <MenuItem onClick={props.onExportButtonClick}>
                         <FormattedMessage
                             defaultMessage="export"
@@ -72,7 +77,7 @@ const SpriteSelectorItem = props => (
                             id="gui.spriteSelectorItem.contextMenuExport"
                         />
                     </MenuItem>
-                ) : null }
+                ) : null } */}
                 {props.onDeleteButtonClick ? (
                     <DangerousMenuItem onClick={props.onDeleteButtonClick}>
                         <FormattedMessage
@@ -83,7 +88,7 @@ const SpriteSelectorItem = props => (
                     </DangerousMenuItem>
                 ) : null }
             </ContextMenu>
-        ) : null}
+                ) : null}
     </ContextMenuTrigger>
 );
 

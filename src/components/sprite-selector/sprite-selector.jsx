@@ -80,8 +80,8 @@ const SpriteSelectorComponent = function (props) {
             className={styles.spriteSelector}
             {...componentProps}
         >
-
-            <SpriteInfo
+            {/* 精灵信息面板 */}
+            {/* <SpriteInfo
                 direction={selectedSprite.direction}
                 disabled={spriteInfoDisabled}
                 name={selectedSprite.name}
@@ -98,7 +98,7 @@ const SpriteSelectorComponent = function (props) {
                 onChangeVisibility={onChangeSpriteVisibility}
                 onChangeX={onChangeSpriteX}
                 onChangeY={onChangeSpriteY}
-            />
+            /> */}
 
             <SpriteList
                 editingTarget={editingTarget}
@@ -112,6 +112,7 @@ const SpriteSelectorComponent = function (props) {
                 onExportSprite={onExportSprite}
                 onSelectSprite={onSelectSprite}
             />
+            {/* 添加精灵 */}
             <ActionMenu
                 className={styles.addButton}
                 img={spriteIcon}

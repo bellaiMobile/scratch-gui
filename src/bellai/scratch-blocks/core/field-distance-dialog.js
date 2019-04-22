@@ -12,6 +12,8 @@ export default function (Blockly) {
     };
     // props
     Blockly.FieldDisanceDialog.prototype.sliderback = null;
+    Blockly.FieldDisanceDialog.prototype.thumb_ = null;
+    Blockly.FieldDisanceDialog.prototype.currentVal_ = 6;
     Blockly.FieldDisanceDialog.prototype.labels = null;
     Blockly.FieldDisanceDialog.MIN_VALUE = 6;
     Blockly.FieldDisanceDialog.MAX_VALUE = 20;
@@ -75,26 +77,42 @@ export default function (Blockly) {
         this.sliderback = document.createElement('div');
         this.sliderback.style = sliderbackStyle;
 
-        var thumb = document.createElement('div');
-        thumb.className = 'bell-distance-slider-thumb';
+        this.thumb_ = document.createElement('div');
+        this.thumb_.className = 'bell-distance-slider-thumb';
 
         var slider = document.createElement('div');
         slider.className = 'bell-distance-dialog-slider';
+
+        for(var i = 0; i < 3 ; i++){
+            var sliderItem = document.createElement('div');
+            sliderItem.className = 'bell-distance-dialog-slider-item';
+            sliderItem.style.left = `${i == 1 ? '33.333%' : (i == 2 ? '66.666%' : '0')}`;
+            slider.appendChild(sliderItem);
+        }
+
         slider.appendChild(this.sliderback);
-        slider.appendChild(thumb);
+        slider.appendChild(this.thumb_);
+
+        Blockly.bindEvent_(slider, 'mousedown', null, (e) => {
+            if(e.target == slider.childNodes[1]){
+                this.thumb_.style.left = '50%';
+                this.sliderback.style.width = '50%';
+                this.currentVal_ = (Blockly.FieldDisanceDialog.MIN_VALUE + Math.floor((Blockly.FieldDisanceDialog.MAX_VALUE - Blockly.FieldDisanceDialog.MIN_VALUE) / 2));
+            }else if(e.target == slider.childNodes[2]){
+                this.thumb_.style.left = '96%';
+                this.sliderback.style.width = '100%';
+                this.currentVal_ = 20;
+            }else{
+                this.thumb_.style.left = '4%';
+                this.sliderback.style.width = '0';
+                this.currentVal_ = 6;
+            }
+        });
 
         container.appendChild(topTextContainer);
         container.appendChild(slider);
         container.appendChild(bottomTextContainer);
         div.appendChild(container);
-
-        this.slider_ = new goog.ui.Slider(new goog.dom.DomHelper());
-        this.slider_.setStep(Math.floor((Blockly.FieldDisanceDialog.MAX_VALUE - Blockly.FieldDisanceDialog.MIN_VALUE) / 2));
-        this.slider_.setMinimum(Blockly.FieldDisanceDialog.MIN_VALUE);
-        this.slider_.setMaximum(Blockly.FieldDisanceDialog.MAX_VALUE);
-        this.slider_.setMoveToPointEnabled(true);
-        this.slider_.decorate(slider);
-        goog.events.listen(this.slider_, goog.ui.Component.EventType.CHANGE, this.ChangeSilder, false, this);
 
         // 确认按钮
         var saveBtn = document.createElement('div');
@@ -103,7 +121,7 @@ export default function (Blockly) {
         div.appendChild(saveBtn);
         Blockly.bindEvent_(saveBtn, 'mousedown', null, (e) => {
             // 删除语句块时， 如果结果是int 会提示不是node类型， 需要将结果转换为string
-            this.setText(this.slider_.getValue());
+            this.setText(this.currentVal_);
             Blockly.DialogDiv.hide(); // hide
         });
 
@@ -115,14 +133,6 @@ export default function (Blockly) {
         });
         this.reloadUI(); //需调用，改变UI
     }
-
-    Blockly.FieldDisanceDialog.prototype.ChangeSilder = function () {
-        // console.log(this.slider_.valueThumb.style.left) // slider thumb
-        this.innerData_ = this.slider_.getValue();
-        this.sliderback.style.width = ((this.slider_.getValue() - Blockly.FieldDisanceDialog.MIN_VALUE) / (Blockly.FieldDisanceDialog.MAX_VALUE - Blockly.FieldDisanceDialog.MIN_VALUE) * 284) +
-            0 + 'px'; //背景变色，写死的
-        this.renderLabels();
-    };
 
     Blockly.FieldDisanceDialog.prototype.renderLabels = function () {
         var pStart = Blockly.FieldDisanceDialog.MIN_VALUE;
@@ -158,16 +168,17 @@ export default function (Blockly) {
     };
 
     Blockly.FieldDisanceDialog.prototype.reloadUI = function () {
-        // left: 130px; top: -2px; = 13
-        // left: 259px; top: -2px; = 20
-        if (this.innerData_ == 13) {
-            this.slider_.valueThumb.style.left = "130px";
-        } else if (this.innerData_ == 20) {
-            this.slider_.valueThumb.style.left = "259px";
-        } else {
-            this.slider_.valueThumb.style.left = "0px";
-        }
-        this.slider_.setValue(this.innerData_);
+        if(this.innerData_ == 13){
+            this.thumb_.style.left = '50%';
+            this.sliderback.style.width = '50%';
+        }else if(this.innerData_ == 20){
+            this.thumb_.style.left = '96%';
+            this.sliderback.style.width = '100%';
+        }else{
+            this.thumb_.style.left = '4%';
+            this.sliderback.style.width = '0';
+        }    
+        this.currentVal_ = this.innerData_;
         this.renderLabels();
     };
 
@@ -175,6 +186,8 @@ export default function (Blockly) {
         this.sliderback = null;
         this.labels = null;
         this.slider_ = null;
+        this.thumb_ = null;
+        this.currentVal_ = 6;
         // Blockly.FieldDisanceDialog.prototype.dispose.call(this);
     };
 
